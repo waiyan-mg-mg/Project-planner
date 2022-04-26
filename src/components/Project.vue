@@ -1,18 +1,20 @@
 <template>
   <div
     class="project_container"
-    :class="{ done: inProgress }"
+    :class="{ doneToggle: project.complete }"
     @click.self="toggleDetail = !toggleDetail"
   >
     <div class="flex_container" @click.self="toggleDetail = !toggleDetail">
-      <h4 @click.self="toggleDetail = !toggleDetail">{{ project.title }}</h4>
+      <h4 @click.self="toggleDetail = !toggleDetail">
+        {{ project.title }} {{ project.complete }}
+      </h4>
       <div class="icon_box">
-        <span class="trash" @click="this.$emit('removeProject')">🗑</span>
+        <span class="trash" @click="removeProject">🗑</span>
         <span class="edit">🖍</span>
         <span
-          class="done"
-          @click="this.inProgress = !this.inProgress"
-          :class="{ doneStatus: inProgress }"
+          class="doneToggle"
+          @click="toggleComplete"
+          :class="{ doneStatus: project.complete }"
           >✔</span
         >
       </div>
@@ -27,11 +29,36 @@ export default {
   props: ["project"],
   data() {
     return {
+      api: "http://localhost:3000/projects/",
       toggleDetail: false,
-      inProgress: false,
+      isDone: this.project.complete,
     };
   },
-  methods: {},
+  methods: {
+    removeProject() {
+      fetch(this.api + this.project.id, {
+        method: "DELETE",
+      })
+        .then(() => {
+          this.$emit("removeProject");
+        })
+        .catch((err) => console.log(err));
+    },
+    toggleComplete() {
+      fetch(this.api + this.project.id, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          complete: !this.project.complete,
+        }),
+      })
+        .then(() => {
+          // this.project.complete = !this.project.complete;{simple and cool method}
+          this.$emit("completeProject", this.project.id);
+        })
+        .catch();
+    },
+  },
 };
 </script>
 
@@ -39,13 +66,13 @@ export default {
 .project_container {
   padding: 15px 25px;
   margin: 15px 0;
-  background: rgb(230, 230, 230);
+  background: rgb(249, 240, 255);
   border-radius: 10px;
   cursor: pointer;
-  border-left: 3px solid red;
+  border-left: 5px solid red;
 }
-.project_container.done {
-  border-color: green;
+.project_container.doneToggle {
+  border-left-color: rgb(113, 255, 113);
 }
 .project_container h4 {
   margin: 10px 0;
@@ -87,13 +114,13 @@ export default {
 .icon_box .edit {
   color: orangered;
 }
-.icon_box .done {
-  color: green;
+.icon_box .doneToggle {
+  color: rgb(71, 247, 71);
 }
-.done.doneStatus {
+.doneToggle.doneStatus {
   color: gray;
 }
-.done.doneStatus:hover {
+.doneToggle.doneStatus:hover {
   transform: translate(0px);
 }
 </style>

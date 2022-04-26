@@ -1,8 +1,11 @@
 <template>
   <div class="home">
-    <h1>home</h1>
     <div v-for="project in projects" :key="project.id">
-      <Project :project="project" @removeProject="removeProject(project.id)" />
+      <Project
+        :project="project"
+        @removeProject="removeProject(project.id)"
+        @completeProject="completeProject"
+      />
     </div>
   </div>
 </template>
@@ -34,6 +37,13 @@ export default {
     removeProject(removeId) {
       this.projects = this.projects.filter((single) => single.id !== removeId);
     },
+    completeProject(completId) {
+      const matchProject = this.projects.find(
+        (singleProject) => singleProject.id === completId
+      );
+      matchProject.complete = !matchProject.complete;
+    },
   },
 };
 </script>
+<style scoped></style>
