@@ -1,7 +1,10 @@
 <template>
   <div class="home">
-    <FilterNavigation />
-    <div v-for="project in projects" :key="project.id">
+    <FilterNavigation
+      @activeLink="currentLink = $event"
+      :current="currentLink"
+    ></FilterNavigation>
+    <div v-for="project in filteredProject" :key="project.id">
       <Project
         :project="project"
         @removeProject="removeProject(project.id)"
@@ -22,6 +25,7 @@ export default {
   name: "HomeView",
   data() {
     return {
+      currentLink: "all",
       projects: [],
     };
   },
@@ -47,6 +51,20 @@ export default {
         (singleProject) => singleProject.id === completId
       );
       matchProject.complete = !matchProject.complete;
+    },
+  },
+  computed: {
+    filteredProject() {
+      const cur = this.currentLink;
+      if (cur === "all") {
+        return this.projects;
+      } else if (cur === "complete") {
+        return this.projects.filter((singleProject) => singleProject.complete);
+      } else {
+        return this.projects.filter(
+          (singleProject) => singleProject.complete === false
+        );
+      }
     },
   },
 };

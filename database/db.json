@@ -9,13 +9,13 @@
     {
       "title": "three",
       "detail": "lore m three\n",
-      "complete": false,
+      "complete": true,
       "id": 3
     },
     {
       "title": "four and edit",
       "detail": "lorem four and eddit",
-      "complete": false,
+      "complete": true,
       "id": 4
     }
   ]

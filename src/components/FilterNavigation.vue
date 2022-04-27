@@ -20,14 +20,13 @@
 
 <script>
 export default {
+  props: ["current"],
   data() {
-    return {
-      current: "all",
-    };
+    return {};
   },
   methods: {
     filter(key) {
-      this.current = key;
+      this.$emit("activeLink", key);
     },
   },
 };
