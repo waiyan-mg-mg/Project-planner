@@ -1,70 +1,22 @@
 {
   "projects": [
     {
-      "id": 1,
-      "title": "title one",
-      "detail": "some",
-      "complete": true
-    },
-    {
-      "id": 2,
-      "title": "title two",
-      "detail": "some",
-      "complete": false
-    },
-    {
-      "id": 3,
-      "title": "title three",
-      "detail": "some",
-      "complete": false
-    },
-    {
-      "id": 4,
-      "title": "title four",
-      "detail": "some",
-      "complete": false
-    },
-    {
-      "id": 5,
-      "title": "title five",
-      "detail": "some",
-      "complete": false
-    },
-    {
-      "id": 6,
-      "title": "title six",
-      "detail": "some",
-      "complete": false
-    },
-    {
-      "title": "new title",
-      "detail": "this is new title",
+      "title": "one",
+      "detail": "lorem ispan tha nu parchar nunu damm lopaset",
       "complete": false,
-      "id": 7
+      "id": 1
     },
     {
-      "title": "fsdf",
-      "detail": "sfsdf",
+      "title": "three",
+      "detail": "lore m three\n",
       "complete": false,
-      "id": 8
+      "id": 3
     },
     {
-      "title": "dfsd",
-      "detail": "ddddddd",
+      "title": "four and edit",
+      "detail": "lorem four and eddit",
       "complete": false,
-      "id": 9
-    },
-    {
-      "title": "tiele",
-      "detail": "sdfldf",
-      "complete": false,
-      "id": 10
-    },
-    {
-      "title": "fdasfdf",
-      "detail": "df",
-      "complete": false,
-      "id": 11
+      "id": 4
     }
   ]
 }

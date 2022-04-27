@@ -6,11 +6,14 @@
   >
     <div class="flex_container" @click.self="toggleDetail = !toggleDetail">
       <h4 @click.self="toggleDetail = !toggleDetail">
-        {{ project.title }} {{ project.complete }}
+        {{ project.title }}
       </h4>
       <div class="icon_box">
         <span class="trash" @click="removeProject">🗑</span>
-        <span class="edit">🖍</span>
+        <router-link
+          :to="{ name: 'editProject', params: { id: this.project.id } }"
+          ><span class="edit">🖍</span></router-link
+        >
         <span
           class="doneToggle"
           @click="toggleComplete"
